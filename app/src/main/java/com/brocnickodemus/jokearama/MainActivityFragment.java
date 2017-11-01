@@ -1,6 +1,5 @@
 package com.brocnickodemus.jokearama;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,13 +31,21 @@ public class MainActivityFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.joke_title);
-            mTitleTextView = (TextView) itemView.findViewById(R.id.joke_text);
+            mTextTextView = (TextView) itemView.findViewById(R.id.joke_text);
+
         }
 
         public void bind(Joke joke) {
             mJoke = joke;
             mTitleTextView.setText(mJoke.getTitle().toString());
-            mTextTextView.setText(mJoke.getText().toString());
+            String[] knockKnock = mJoke.getText();
+            String jokeText = "";
+
+            for (int i = 0; i < 5; i++) {
+                jokeText += knockKnock[i];
+            }
+
+            mTextTextView.setText(jokeText.toString());
         }
 
         @Override

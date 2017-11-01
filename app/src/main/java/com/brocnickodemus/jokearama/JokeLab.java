@@ -3,8 +3,6 @@ package com.brocnickodemus.jokearama;
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,10 +25,10 @@ public class JokeLab {
     private JokeLab(Context context) {
         mJokes = new ArrayList<Joke>();
         String[] text = new String[5];
-        text[0] = "Knock knock.";
-        text[1] = "Who's there?";
-        text[2] = "Kotlin.";
-        text[3] = "Kotlin who?";
+        text[0] = "Knock knock. ";
+        text[1] = "Who's there? ";
+        text[2] = "Kotlin. ";
+        text[3] = "Kotlin who? ";
         text[4] = "Kotlin the language, you fool!";
 
         for (int i = 0; i < 100; i++) {
