@@ -1,5 +1,6 @@
 package com.brocnickodemus.jokearama;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,8 +51,8 @@ public class MainActivityFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            //Intent intent = JokeActivity.newIntent(getActivity(), mJoke.getId());
-            //startActivity(intent);
+            Intent intent = JokeActivity.newIntent(getActivity(), mJoke.getId());
+            startActivity(intent);
         }
     }
 
