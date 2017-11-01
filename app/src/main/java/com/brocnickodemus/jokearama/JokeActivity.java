@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -13,23 +13,32 @@ import java.util.UUID;
  */
 
 public class JokeActivity extends AppCompatActivity{
-    private List<Joke> mJokes;
+    private Joke mJoke;
+
+    private TextView mKnockTextView;
+    private TextView mWhosThereTextView;
+    private TextView mResponseTextView;
+    private TextView mResponseWhoTextView;
+    private TextView mAnswerTextView;
 
     private static final String EXTRA_JOKE_ID = "com.brocnickodemus.criminalintent.joke_id";
+    //bundle args
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.fragment_joke);
+        setContentView(R.layout.joke);
 
-        mJokes = JokeLab.get(this).getJokes();
+        /*
+        mJoke = JokeLab.get(this).getJoke();
+        String[] text = mJoke.getText();
 
-        /*FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        JokeFragment fragment = new JokeFragment();
-        fragmentTransaction.add(R.id.fragment_joke, fragment);
-        fragmentTransaction.commit();*/
+        mKnockTextView.setText(text[0].toString());
+        mWhosThereTextView.setText(text[0].toString());
+        mResponseTextView.setText(text[0].toString());
+        mResponseWhoTextView.setText(text[0].toString());
+        mAnswerTextView.setText(text[0].toString());
+        */
     }
 
     public static Intent newIntent(Context packageContext, UUID jokeId) {
