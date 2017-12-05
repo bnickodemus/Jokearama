@@ -10,19 +10,19 @@ import java.util.UUID;
  * Created by Broc on 10/30/17.
  */
 
-public class JokeLab {
+public class JokeStorage {
 
-    private static JokeLab sJokeLab;
+    private static JokeStorage sJokeStorage;
     private List<Joke> mJokes;
 
-    public static JokeLab get(Context context) {
-        if (sJokeLab == null) {
-            sJokeLab = new JokeLab(context);
+    public static JokeStorage get(Context context) {
+        if (sJokeStorage == null) {
+            sJokeStorage = new JokeStorage(context);
         }
-        return sJokeLab;
+        return sJokeStorage;
     }
 
-    private JokeLab(Context context) {
+    private JokeStorage(Context context) {
         mJokes = new ArrayList<Joke>();
         String[] text = new String[5];
         text[0] = "Knock knock. ";

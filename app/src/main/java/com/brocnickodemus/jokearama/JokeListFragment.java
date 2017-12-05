@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Broc on 10/30/17.
  */
 
-public class MainActivityFragment extends Fragment {
+public class JokeListFragment extends Fragment {
 
     private RecyclerView mJokeRecyclerView;
     private JokeAdapter mJokeAdapter;
@@ -94,8 +94,8 @@ public class MainActivityFragment extends Fragment {
     }
 
     private void updateUI() {
-        JokeLab jokeLab = JokeLab.get(getActivity());
-        List<Joke> jokes = jokeLab.getJokes();
+        JokeStorage jokeStorage = JokeStorage.get(getActivity());
+        List<Joke> jokes = jokeStorage.getJokes();
 
         if (mJokeAdapter == null) {
             mJokeAdapter = new JokeAdapter(jokes);
