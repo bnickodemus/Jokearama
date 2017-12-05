@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Jokearama</string>
+    <string name="jokes">jokes</string>
 </resources>

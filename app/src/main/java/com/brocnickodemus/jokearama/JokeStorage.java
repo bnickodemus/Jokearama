@@ -51,4 +51,14 @@ public class JokeStorage {
         }
         return null;
     }
+
+    public int getNumJokesCompleted() {
+        int numCompleted = 0;
+        for (Joke joke : mJokes) {
+            if (joke.getCompleted()) {
+                numCompleted++;
+            }
+        }
+        return numCompleted;
+    }
 }

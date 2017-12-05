@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -97,15 +101,6 @@ public class JokeListFragment extends Fragment {
         return view;
     }
 
-    private void updateNumJokes() {
-        JokeStorage jokeStorage = JokeStorage.get(getActivity());
-        int jokeCount = jokeStorage.getJokes().size();
-        //int jokesCompleted = jokeStorage.getCompleted();
-        //String numJokesSubtitle = String.format(getString(R.string.num_jokes_subtitle), jokeCount, jokesCompleted);
-        //AppCompatActivity activity = (AppCompatActivity) getActivity();
-        //activity.getSupportActionBar().setSubtitle(numJokesSubtitle);
-    }
-
     private void updateUI() {
         JokeStorage jokeStorage = JokeStorage.get(getActivity());
         List<Joke> jokes = jokeStorage.getJokes();
@@ -120,8 +115,51 @@ public class JokeListFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         updateUI();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.joke_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.reset_jokes:
+                resetJokesCompleted();
+                updateUI();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void resetJokesCompleted() {
+        JokeStorage jokeStorage = JokeStorage.get(getActivity());
+        List<Joke> mJokes = jokeStorage.getJokes();
+        for (Joke joke : mJokes) {
+            joke.setCompleted(false);
+        }
+        updateUI();
+    }
+
+    private void updateNumJokes() {
+        JokeStorage jokeStorage = JokeStorage.get(getActivity());
+        int numCompleted = jokeStorage.getNumJokesCompleted();
+        String jokesSubtitle = Integer.toString(jokeStorage.getJokes().size()) + " jokes. " +
+                Integer.toString(numCompleted) + " completed";
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().setSubtitle(jokesSubtitle);
     }
 }
