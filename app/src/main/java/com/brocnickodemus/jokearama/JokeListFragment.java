@@ -17,6 +17,7 @@ import java.util.List;
  */
 
 public class JokeListFragment extends Fragment {
+    static final int REQUEST_CODE = 1;  // The request code
 
     private RecyclerView mJokeRecyclerView;
     private JokeAdapter mJokeAdapter;
@@ -43,7 +44,7 @@ public class JokeListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Intent intent = JokeActivity.newIntent(getActivity(), mJoke.getId());
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE);
         }
     }
 
