@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +39,18 @@ public class JokeListFragment extends Fragment {
 
         public void bind(Joke joke) {
             mJoke = joke;
-            mTitleTextView.setText(mJoke.getTitle().toString() + String.valueOf(mJoke.getCompleted()));
+            mTitleTextView.setText(mJoke.getTitle().toString());
             if (mJoke.getCompleted())
                 mTitleTextView.setBackgroundColor(Color.GRAY);
+            else {
+                // get theme background color
+                TypedValue a = new TypedValue();
+                getActivity().getTheme().resolveAttribute(android.R.attr.windowBackground, a, true);
+                if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+                    int color = a.data;
+                    mTitleTextView.setBackgroundColor(color);
+                }
+            }
         }
 
         @Override
