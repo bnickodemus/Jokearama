@@ -87,6 +87,15 @@ public class JokeListFragment extends Fragment {
         return view;
     }
 
+    private void updateNumJokes() {
+        JokeStorage jokeStorage = JokeStorage.get(getActivity());
+        int jokeCount = jokeStorage.getJokes().size();
+        //int jokesCompleted = jokeStorage.getCompleted();
+        //String numJokesSubtitle = String.format(getString(R.string.num_jokes_subtitle), jokeCount, jokesCompleted);
+        //AppCompatActivity activity = (AppCompatActivity) getActivity();
+        //activity.getSupportActionBar().setSubtitle(numJokesSubtitle);
+    }
+
     private void updateUI() {
         JokeStorage jokeStorage = JokeStorage.get(getActivity());
         List<Joke> jokes = jokeStorage.getJokes();
@@ -97,5 +106,12 @@ public class JokeListFragment extends Fragment {
         } else {
             mJokeAdapter.notifyDataSetChanged();
         }
+        updateNumJokes();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
     }
 }
