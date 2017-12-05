@@ -32,21 +32,12 @@ public class JokeListFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.joke_title);
-            mTextTextView = (TextView) itemView.findViewById(R.id.joke_text);
-
+            //mTextTextView = (TextView) itemView.findViewById(R.id.joke_text);
         }
 
         public void bind(Joke joke) {
             mJoke = joke;
             mTitleTextView.setText(mJoke.getTitle().toString());
-            String[] knockKnock = mJoke.getText();
-            String jokeText = "";
-
-            for (int i = 0; i < 5; i++) {
-                jokeText += knockKnock[i];
-            }
-
-            mTextTextView.setText(jokeText.toString());
         }
 
         @Override

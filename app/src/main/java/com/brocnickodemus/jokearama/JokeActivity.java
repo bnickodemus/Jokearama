@@ -2,9 +2,7 @@ package com.brocnickodemus.jokearama;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
+import android.support.v4.app.Fragment;
 
 import java.util.UUID;
 
@@ -12,34 +10,9 @@ import java.util.UUID;
  * Created by Broc on 10/30/17.
  */
 
-public class JokeActivity extends AppCompatActivity{
-    private Joke mJoke;
+public class JokeActivity extends SingleFragmentActivity {
 
-    private TextView mKnockTextView;
-    private TextView mWhosThereTextView;
-    private TextView mResponseTextView;
-    private TextView mResponseWhoTextView;
-    private TextView mAnswerTextView;
-
-    private static final String EXTRA_JOKE_ID = "com.brocnickodemus.criminalintent.joke_id";
-    //bundle args
-
-    @Override
-    protected void onCreate(Bundle saveInstanceState) {
-        super.onCreate(saveInstanceState);
-        setContentView(R.layout.joke);
-
-        /*
-        mJoke = JokeLab.get(this).getJoke();
-        String[] text = mJoke.getText();
-
-        mKnockTextView.setText(text[0].toString());
-        mWhosThereTextView.setText(text[0].toString());
-        mResponseTextView.setText(text[0].toString());
-        mResponseWhoTextView.setText(text[0].toString());
-        mAnswerTextView.setText(text[0].toString());
-        */
-    }
+    private static final String EXTRA_JOKE_ID = "com.brocnickodemus.jokearama.joke_id";
 
     public static Intent newIntent(Context packageContext, UUID jokeId) {
         Intent intent = new Intent(packageContext, JokeActivity.class);
@@ -47,4 +20,10 @@ public class JokeActivity extends AppCompatActivity{
         return intent;
     }
 
+    @Override
+    protected Fragment createFragment() {
+        UUID jokeId = (UUID) getIntent().getSerializableExtra(EXTRA_JOKE_ID);
+        return JokeFragment.newInstance(jokeId);
+    }
 }
+
