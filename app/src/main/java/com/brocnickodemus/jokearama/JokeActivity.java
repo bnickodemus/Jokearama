@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -28,12 +27,6 @@ public class JokeActivity extends AppCompatActivity {
     private TextView mResponseWhoTextView;
     private TextView mAnswerTextView;
     int numTimesClicked = 0;
-
-    private static final int SWIPE_MIN_DISTANCE = 120;
-    private static final int SWIPE_MAX_OFF_PATH = 250;
-    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
-    private GestureDetector gestureDetector;
-    View.OnTouchListener gestureListener;
 
     // add joke id to the intent extra
     public static Intent newIntent(Context packageContext, UUID jokeId) {
@@ -61,7 +54,6 @@ public class JokeActivity extends AppCompatActivity {
         //mKnockTextView.setText(mJoke.getTitle().toString());
 
         View view = (View) this.findViewById(android.R.id.content); // get the current view
-
         view.setOnTouchListener(new OnTouchListener() {
             int downX, upX;
 
@@ -99,6 +91,7 @@ public class JokeActivity extends AppCompatActivity {
                         break;
                     default:
                         mAnswerTextView.setText(text[4].toString());
+                        mJoke.setCompleted(true);
                 }
                 numTimesClicked++;
             }

@@ -1,6 +1,7 @@
 package com.brocnickodemus.jokearama;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,12 +34,13 @@ public class JokeListFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.joke_title);
-            //mTextTextView = (TextView) itemView.findViewById(R.id.joke_text);
         }
 
         public void bind(Joke joke) {
             mJoke = joke;
-            mTitleTextView.setText(mJoke.getTitle().toString());
+            mTitleTextView.setText(mJoke.getTitle().toString() + String.valueOf(mJoke.getCompleted()));
+            if (mJoke.getCompleted())
+                mTitleTextView.setBackgroundColor(Color.GRAY);
         }
 
         @Override
